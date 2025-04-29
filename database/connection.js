@@ -5,7 +5,7 @@ const {Sequelize,DataTypes}=require("sequelize")//Destructure garekovanxa js ma
 // const Sequeluze = sequelize.Sequelize
 // const DataTypes=sequelize.DataTypes
 
-const sequelize=new Sequelize("postgresql://postgres.ceyvryhctklokhkqxyww:Supabase246810@aws-0-ap-south-1.pooler.supabase.com:6543/postgres")
+const sequelize=new Sequelize(process.env.cs)
 
 sequelize.authenticate()
 .then(()=>{
