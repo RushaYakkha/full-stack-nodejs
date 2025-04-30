@@ -18,5 +18,11 @@ sequelize.authenticate()
 const db ={}
 db.Sequelize=Sequelize
 db.sequelize=sequelize
+db.books = require("./models/book.model")(sequelize,DataTypes)
+//migrate garne code hoo yo
+sequelize.sync({force : false,alter : false}).then(()=>{
+   
+})
+
 
 module.exports=db
