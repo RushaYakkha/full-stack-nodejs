@@ -1,4 +1,5 @@
 let express = require('express')
+const { books } = require('./database/connection')
 let app = express()
 //let app=require('express')()
 
@@ -34,11 +35,12 @@ let app = express()
 //})
 
 require("./database/connection")//import gareko connection.js file lai
-app.get("/books",function(req,res){
+app.get("/books",async function(req,res){
     //logic to fetch book from database
-
+    const datas=await books.findAll()//findAll()le select * from books gare jastae hoo->Jaile return arraymai garxa ,await =>khi request time lagne vaye,await garda function ma async pani add garnai parcha
     res.json({
-        message :"Book Fetched Successfully"
+        message :"Book Fetched Successfully",
+        datas : datas //yeslai direct 'datas' matra lekhda ni hunxa jaba key : value same vako casema
     })
 })
 
