@@ -1,6 +1,7 @@
 let express = require('express')
 const { books } = require('./database/connection')
 let app = express()
+
 //let app=require('express')()
 
 // app.listen(3000,function(){
@@ -35,6 +36,7 @@ let app = express()
 //})
 
 require("./database/connection")//import gareko connection.js file lai
+app.use(express.json())
 app.get("/books",async function(req,res){
     //logic to fetch book from database
     const datas=await books.findAll()//findAll()le select * from books gare jastae hoo->Jaile return arraymai garxa ,await =>khi request time lagne vaye,await garda function ma async pani add garnai parcha
@@ -45,9 +47,17 @@ app.get("/books",async function(req,res){
 })
 
 
-app.post("/books",function(req,res){
+app.post("/books",async function(req,res){
     //logic to insert book in database
-
+    // console.log(req.body)
+    const {bookName,price,bookAuthor,bookGenre}=req.body
+       await books.create({
+            bookName,
+           bookPrice : price,
+            bookAuthor,
+            bookGenre
+        })
+    
     res.json({
         message:"Book added successfully"
     })
