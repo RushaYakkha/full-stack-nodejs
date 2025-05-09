@@ -38,7 +38,7 @@ let app = express()
 
 require("./database/connection")//import gareko connection.js file lai
 app.use(express.json())
-app.use("/api/",bookRoute)
+app.use("/api",bookRoute)
 
 postgresql://postgres.ceyvryhctklokhkqxyww:supabase246810@aws-0-ap-south-1.pooler.supabase.com:6543/postgres //connection stringSSSSSSSSS
 

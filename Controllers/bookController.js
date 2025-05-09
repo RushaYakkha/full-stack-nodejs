@@ -12,10 +12,10 @@ exports.fetchBook = async function(req,res){
 exports.addBook = async function(req,res){
     //logic to insert book in database
     // console.log(req.body)
-    const {bookName,price,bookAuthor,bookGenre}=req.body
+    const {bookName,bookPrice,bookAuthor,bookGenre}=req.body
        await books.create({
             bookName,
-           bookPrice : price,
+           bookPrice ,
             bookAuthor,
             bookGenre
         })
@@ -25,16 +25,33 @@ exports.addBook = async function(req,res){
     })
 }
 
-exports.deleteBook = function(req,res){
+exports.deleteBook = async function(req,res){
     //logic to delete book from database
+    //first ma hami kun book delete garna lageko tesko id linxam
+    const id = req.params.id 
 
+    //id paiesakk paxi tyo id ko book chai table bata udaie diney
+    await books.destroy({
+        where : {
+            id
+        }
+    })
     res.json({
         message :"book deleted successfully"
     })
 }
 
-exports.updateBook = function(req,res){
+exports.updateBook = async function(req,res){
     //logic to update data on database
+    //first kun id ko update garne typo linu paryo
+    const id = req.params.id
+    //kk update garne vanne chaiyo
+    const {bookName,bookPrice,bookAuthor,bookGenre}=req.body
+   await books.update({bookName : bookName,bookAuthor : bookAuthor,bookPrice:bookPrice,bookGenre:bookGenre},{
+        where :{
+            id : id
+        }
+    })
 
     res.json({
         message : "Book Updated successfully"
