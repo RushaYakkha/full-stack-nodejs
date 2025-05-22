@@ -59,16 +59,23 @@ exports.updateBook = async function(req,res){
 }
 
 exports.singleFetchBook = async function(req,res){
-    //logic to update data on database
-    const id = req.params.id
-    const datas = await books.findByPk(id)
+    try {
+        const id = req.params.id
+        const book = await books.findByPk(id)
+        if (!book) {
+            return res.status(404).json({ message: "Book not found" })
+        }
 
-
-    res.json({
-        message : "single Book fetched successfully",
-        datas : datas
-    })
+        res.json({
+            message : "Single book fetched successfully",
+            data : book
+        })
+    } catch (error) {
+        console.error("Error fetching single book:", error)
+        res.status(500).json({ message: "Internal Server Error" })
+    }
 }
+
 
 
 

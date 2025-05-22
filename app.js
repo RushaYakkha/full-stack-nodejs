@@ -1,5 +1,6 @@
 let express = require('express')
 const bookRoute = require("./routes/bookRouter")
+const cors = require("cors")
 //const { fetchBook, addBook, deleteBook, updateBook } = require('./Controllers/bookController')
 let app = express()
 
@@ -37,6 +38,9 @@ let app = express()
 //})
 
 require("./database/connection")//import gareko connection.js file lai
+app.use(cors({
+    origin : "http://localhost:5173"
+}))
 app.use(express.json())
 app.use("/api",bookRoute)
 
@@ -45,8 +49,8 @@ postgresql://postgres.ceyvryhctklokhkqxyww:supabase246810@aws-0-ap-south-1.poole
 
 
 
-app.listen(4000, function(){
-    console.log("Project has started at port 4000")
+app.listen(4001, function(){
+    console.log("Project has started at port 4001")
 })
 
 
