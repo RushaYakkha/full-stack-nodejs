@@ -42,7 +42,7 @@ app.use(cors({
     origin : "http://localhost:5173"
 }))
 app.use(express.json())
-app.use("/api",bookRoute)
+app.use("/books",bookRoute)
 
 postgresql://postgres.ceyvryhctklokhkqxyww:supabase246810@aws-0-ap-south-1.pooler.supabase.com:6543/postgres //connection stringSSSSSSSSS
 

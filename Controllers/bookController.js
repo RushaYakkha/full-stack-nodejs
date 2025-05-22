@@ -57,27 +57,26 @@ exports.updateBook = async function(req,res){
         message : "Book Updated successfully"
     })
 }
-
-exports.singleFetchBook = async function(req,res){
+exports.singleFetchBook = async function(req, res) {
     try {
-        const id = req.params.id
-        const book = await books.findByPk(id)
+        const id = req.params.id;
+
+        // Validate ID
+        if (isNaN(id)) {
+            return res.status(400).json({ message: "Invalid ID" });
+        }
+
+        const book = await books.findByPk(id);
         if (!book) {
-            return res.status(404).json({ message: "Book not found" })
+            return res.status(404).json({ message: "Book not found" });
         }
 
         res.json({
-            message : "Single book fetched successfully",
-            data : book
-        })
+            message: "Single book fetched successfully",
+            data: book
+        });
     } catch (error) {
-        console.error("Error fetching single book:", error)
-        res.status(500).json({ message: "Internal Server Error" })
+        console.error("Error fetching single book:", error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
-}
-
-
-
-
-// module.exports = {fetchBook,addBook,deleteBook,updateBook}->method-1 to export
-// next method vaneko export garnalai const ko replace exports le garne
+};
